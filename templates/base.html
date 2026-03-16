@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Budget Buddy</title>
+
+</head>
+<body>
+
+    <nav>
+        <a href="{{url_for('HomePage') }}">Home</a>
+        <a href="{{url_for('Summary') }}">Summary</a>
+    </nav>
+
+    {% block content %}
+        <button onclick="{% session.clear %}">Reset</button>
+    {% endblock %}
+</body>
+
+
+</html>
