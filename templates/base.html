@@ -1,4 +1,7 @@
+
+
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -8,13 +11,12 @@
 <body>
 
     <nav>
-        <a href="{{url_for('HomePage') }}">Home</a>
+        <a href="{{url_for('Homepage') }}">Home</a>
         <a href="{{url_for('Summary') }}">Summary</a>
     </nav>
 
-    {% block content %}
-        <button onclick="{% session.clear %}">Reset</button>
-    {% endblock %}
+
+    {% block content %} {% endblock %}
 </body>
 
 

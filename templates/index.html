@@ -1,23 +1,35 @@
-{ % extends "base.html" %}
-
+{% extends "base.html" %}
 {% block content %}
 
+<h1> Enter new income</h1>
+<form method="POST">
+    <label for="incomeDescription">Description:</label>
+    <input id="incomeDescription" type="text" name="incomeDescription">
+
+    <label for="incomeAmount">Amount:</label>
+    <input id="incomeAmount" type="number" name="amount">
+
+    <button type="submit" name="action" value="addIncome">Add Income</button>
+
+</form>
+
+<h1> Enter new expense</h1>
+<form method="POST">
+    <label for="expenseDescription">Description:</label>
+    <input id="expenseDescription" type="text" name="expenseDescription">
 
 
+    <label for="expenseAmount">Expense:</label>
+    <input id="expenseAmount" type="number" name="expense">
+
+    <button type="submit" name="action" value="addExpense">Add Expense</button>
+
+</form>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+<form method="POST">
+    <button type="submit" name="action" value="reset">Reset</button>
+</form>
 
 
 
