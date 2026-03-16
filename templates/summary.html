@@ -7,7 +7,7 @@
 <h3>Description     -      Amount</h3>
 <ul>
 {% for i in incomes %}
-        <li>{{ i.description }} - {{i.amount }}</li>
+        <li>{{ i.description }} - {{i.amount}}</li>
 
 {% endfor %}
 </ul>
@@ -16,15 +16,15 @@
 <h3>Description     -      Amount</h3>
 <ul>
 {% for e in expenses %}
-    <li>{{ e.description }} - {{i.amount }}</li>
+    <li>{{ e.description }} - {{e.amount}}</li>
 {% endfor %}
 </ul>
 
 <h2>Totals</h2>
 
 <p>Total Income: {{ total_income }}</p>
-<p>Total Expense: {{ total_expense }}</p>
-<p>Net Total: {{ net_total }}</p>
+<p>Total Expense: {{ total_expenses}}</p>
+<p>Net Total: {{ net_total}}</p>
 
 {% if net_total > budget%}
     <p>You are within budget</p>

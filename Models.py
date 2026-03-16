@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 class Entry(ABC):
     def __init__(self, description, amount):
         self.description = description
-        self.amount = amount
+        self.amount = float(amount)
 
     @abstractmethod
     def get_amount(self):
@@ -37,4 +37,6 @@ class BudgetManager:
 
     def get_net_total(self):
         return self.get_total_income() - self.get_total_expense()
+
+
 

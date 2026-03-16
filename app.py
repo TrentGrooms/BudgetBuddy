@@ -1,13 +1,22 @@
 from flask import Flask, render_template, abort, request, redirect, url_for, flash, session
 from Models import *
+from format import *
+
 
 app = Flask(__name__)
 app.secret_key= "my_secret_key"
 
+#app.jinja.env.filters["format_total"] = format_price
 BUDGET = 500
+
 @app.route("/",methods=["GET","POST"])
 def Homepage():
-    manager = BudgetManager()
+
+    if "expenses" not in session:
+        session["expenses"] = []
+
+    if "incomes" not in session:
+        session["incomes"] = []
 
 
     if request.method == "GET":
@@ -15,31 +24,29 @@ def Homepage():
     if request.method == "POST":
         formType = request.form.get("action")
         if formType == "reset":
-            reset()
+            return reset()
         if formType == "addExpense":
             ExpenseDecsription = request.form.get("expenseDescription")
             ExpenseAmount = request.form.get("expense")
-            expense = ExpenseEntry(ExpenseDecsription, ExpenseAmount)
 
-            if "expenses" not in session:
-                session["ExpenseList"] = manager.expenses
-            else:
-                session["ExpenseList"].append(expense)
+            session["expenses"].append({"description": ExpenseDecsription,
+                                            "amount": ExpenseAmount})
+            session.modified = True
 
         if formType == "addIncome":
-            IncomeDescripton = request.form.get("incomeDescription")
+            IncomeDescription = request.form.get("incomeDescription")
             IncomeAmount = request.form.get("amount")
-            income = IncomeEntry(IncomeDescripton, IncomeAmount)
-            if "incomes" not in session:
-                session["Incomes"] = manager.incomes
-            else:
-                session["Incomes"].append(income)
+
+            session["incomes"].append({"description": IncomeDescription,
+                                            "amount": IncomeAmount})
+
+            session.modified = True
     return render_template("index.html")
 
 @app.route("/summary")
 def Summary():
 
-    incomes = session.get("Incomes", [])
+    incomes = session.get("incomes", [])
     expenses = session.get("expenses", [])
 
     manager = BudgetManager()
@@ -47,11 +54,14 @@ def Summary():
     for i in incomes:
         manager.add_income(IncomeEntry(i["description"], i["amount"]))
 
-    session["TotalIncome"] = manager.get_total_income()
+        session["TotalIncome"] = manager.get_total_income()
+
 
     for e in expenses:
         manager.add_expense(ExpenseEntry(e["description"], e["amount"]))
-    session["TotalExpense"] = manager.get_total_expense()
+        session["TotalExpense"] = manager.get_total_expense()
+
+
 
     session["NetTotal"] = manager.get_net_total()
 
@@ -61,7 +71,7 @@ def Summary():
                            expenses=expenses,
                            total_income=manager.get_total_income(),
                            total_expenses=manager.get_total_expense(),
-                           net_total = manager.get_net_total(),
+                           net_total=manager.get_net_total(),
                            budget = BUDGET
                            )
 
@@ -70,7 +80,11 @@ def Summary():
 
 def reset():
     session.clear()
-    return redirect(url_for("/"))
+    return redirect(url_for("Homepage"))
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template("page_not_found.html")
 
 
 
