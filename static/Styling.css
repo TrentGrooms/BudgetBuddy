@@ -1,0 +1,60 @@
+header {
+    padding: 15px;
+
+}
+
+
+#navBar {
+    display: flex;
+    justify-content: space-evenly;
+    text-decoration: none;
+
+}
+#homeLink {
+    text-decoration: none;
+    color: blue;
+}
+#summaryLink {
+    text-decoration: none;
+    color: blue;
+}
+#resetLink {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    color: blue;
+}
+#notFoundMessage {
+    display: flex;
+    justify-content: center;
+}
+
+
+body {
+    font-family: 'Consolas', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+    margin: 0;
+    background-color: white;
+}
+
+
+button {
+    padding: 8px 14px;
+    border: none;
+    background-color: crimson;
+    color: white;
+
+
+}
+
+button:hover {
+    background-color: blue;
+
+}
+
+
+#summary-page{
+    display: flex;
+
+    justify-content: center;
+
+}

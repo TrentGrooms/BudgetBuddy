@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Not Found</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='Styling.css') }}">
 </head>
 <body>
-    <h1> This is not the page you're looking for</h1>
-    <a href="{{url_for('Homepage') }}">Home</a>
+    <h1 id="notFoundMessage"> This is not the page you're looking for</h1>
+    <a id="resetLink" href="{{url_for('Homepage') }}">Home</a>
 </body>
 </html>

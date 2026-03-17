@@ -1,35 +1,50 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Budget Summary</h1>
+<div id="summary-page">
 
-<h2>Incomes</h2>
-<h3>Description     -      Amount</h3>
-<ul>
-{% for i in incomes %}
-        <li>{{ i.description }} - {{i.amount}}</li>
+<div>
+    <h1>Budget Summary</h1>
 
-{% endfor %}
-</ul>
+    <h2>Incomes</h2>
+    <h3>Description     -      Amount</h3>
+    <ul>
+    {% for i in incomes %}
+            <li>{{ i.description }} - {{i.amount}}</li>
 
-<h2>Expenses</h2>
-<h3>Description     -      Amount</h3>
-<ul>
-{% for e in expenses %}
-    <li>{{ e.description }} - {{e.amount}}</li>
-{% endfor %}
-</ul>
+    {% endfor %}
+    </ul>
 
-<h2>Totals</h2>
+    <h2>Expenses</h2>
+    <h3>Description     -      Amount</h3>
+    <ul>
+    {% for e in expenses %}
+        <li>{{ e.description }} - {{e.amount}}</li>
+    {% endfor %}
+    </ul>
 
-<p>Total Income: {{ total_income }}</p>
-<p>Total Expense: {{ total_expenses}}</p>
-<p>Net Total: {{ net_total}}</p>
+    <h2>Totals</h2>
 
-{% if net_total > budget%}
-    <p>You are within budget</p>
-{% else %}
-    <p>budget exceeded</p>
-{% endif %}
+    <p>Total Income: {{ total_income }}</p>
+    <p>Total Expense: {{ total_expenses}}</p>
+    <p>Net Total: {{"%.2f"|format(net_total)}}</p>
 
-{% endblock %}
+    {% if net_total > budget%}
+        <p>You are within budget</p>
+    {% else %}
+        <p>budget exceeded</p>
+    {% endif %}
+
+    {% endblock %}
+
+
+
+
+
+
+</div>
+
+
+</div>
+
+

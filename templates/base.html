@@ -6,13 +6,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Budget Buddy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Styling.css') }}">
 
 </head>
 <body>
 
-    <nav>
-        <a href="{{url_for('Homepage') }}">Home</a>
-        <a href="{{url_for('Summary') }}">Summary</a>
+    <nav id="navBar">
+        <a id="homeLink" href="{{url_for('Homepage') }}">Home</a>
+        <a id="summaryLink" href="{{url_for('Summary') }}">Summary</a>
     </nav>
 
 
