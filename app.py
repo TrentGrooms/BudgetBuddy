@@ -1,12 +1,13 @@
 from flask import Flask, render_template, abort, request, redirect, url_for, flash, session
 from Models import *
-from format import *
+from format import format_price, isNumeric
 
 
 app = Flask(__name__)
 app.secret_key= "my_secret_key"
 
-#app.jinja.env.filters["format_total"] = format_price
+app.jinja_env.filters["format_total"] = format_price
+
 BUDGET = 500
 
 @app.route("/",methods=["GET","POST"])
@@ -29,6 +30,12 @@ def Homepage():
             ExpenseDecsription = request.form.get("expenseDescription")
             ExpenseAmount = request.form.get("expense")
 
+
+            if not isNumeric(ExpenseAmount):
+                flash("Expense amount must be numeric")
+                return redirect(url_for("Homepage"))
+            ExpenseAmount = round(float(ExpenseAmount), 2)
+
             session["expenses"].append({"description": ExpenseDecsription,
                                             "amount": ExpenseAmount})
             session.modified = True
@@ -36,6 +43,12 @@ def Homepage():
         if formType == "addIncome":
             IncomeDescription = request.form.get("incomeDescription")
             IncomeAmount = request.form.get("amount")
+
+            if not isNumeric(IncomeAmount):
+                flash("Income amount must be numeric")
+                return redirect(url_for("Homepage"))
+
+            IncomeAmount = round(float(IncomeAmount), 2)
 
             session["incomes"].append({"description": IncomeDescription,
                                             "amount": IncomeAmount})

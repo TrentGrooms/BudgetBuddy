@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>
+      {% for msg in messages %}
+        <li style="color:red;">{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
 <h1> Enter new income</h1>
 <form method="POST">
     <label for="incomeDescription">Description:</label>

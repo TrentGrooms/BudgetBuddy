@@ -25,9 +25,9 @@
 
     <h2>Totals</h2>
 
-    <p>Total Income: {{ total_income }}</p>
-    <p>Total Expense: {{ total_expenses}}</p>
-    <p>Net Total: {{"%.2f"|format(net_total)}}</p>
+    <p>Total Income: {{ total_income | format_total  }}</p>
+    <p>Total Expense: {{ total_expenses | format_total }}</p>
+    <p>Net Total: {{ net_total | format_total }}</p>
 
     {% if net_total > budget%}
         <p>You are within budget</p>
